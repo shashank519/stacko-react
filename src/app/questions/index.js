@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Menu, Icon, List, Tag } from "antd";
+import { List } from "antd";
 import { connect } from "react-redux";
 import { getQuestions } from "Actions/questionActions";
 import ListItem from "./ListItem";

@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import { Layout, Icon } from "antd";
-const { Header, Sider, Content } = Layout;
+const { Header } = Layout;
 
 class AppHeader extends React.Component {
   constructor(props) {

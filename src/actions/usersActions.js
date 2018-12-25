@@ -6,7 +6,10 @@ import {
   FETCHING_USERS_INFO_ERROR,
   FETCHING_USERS_TOP_TAGS,
   FETCHING_USERS_TOP_TAGS_SUCCESS,
-  FETCHING_USERS_TOP_TAGS_ERROR
+  FETCHING_USERS_TOP_TAGS_ERROR,
+  FETCHING_QOU,
+  FETCHING_QOU_SUCCESS,
+  FETCHING_QOU_ERROR
 } from "Constants/usersConstants.js";
 
 // ==============================GET USERS INFO=============================
@@ -32,11 +35,9 @@ export const getUsersInfo = id => {
         `https://api.stackexchange.com/2.2/users/${id}?order=desc&sort=reputation&site=stackoverflow`
       )
       .then(response => {
-        console.log(response);
         dispatch(fetchingUserInfoSuccess(response.data));
       })
       .catch(function(error) {
-        console.log(error);
         dispatch(fetchingUserInfoError(error));
       });
   };
@@ -63,16 +64,46 @@ export const getUsersTopTags = id => {
     dispatch(fetchingUserTopTags());
     axios
       .get(
-        `https://api.stackexchange.com//2.2/users/${id}/tags?order=desc&sort=popular&site=stackoverflow`
+        `https://api.stackexchange.com/2.2/users/${id}/tags?order=desc&sort=popular&site=stackoverflow`
       )
       .then(response => {
-        console.log(response);
         dispatch(fetchingUsersTopTagsSuccess(response.data));
       })
       .catch(function(error) {
-        console.log(error);
         dispatch(fetchingUsersTopTagError(error));
       });
   };
 };
 // ==============================GET USERS TOP TAGS=============================
+
+// ==============================QUESTION ON USERS=============================
+export const fetchingQou = () => {
+  return {
+    type: FETCHING_QOU
+  };
+};
+
+export const fetchingQouSuccess = qouData => {
+  return { type: FETCHING_QOU_SUCCESS, qouData };
+};
+
+export const fetchingQouError = error => {
+  return { type: FETCHING_QOU_ERROR, error };
+};
+
+export const getQuestionOnUsers = id => {
+  return dispatch => {
+    dispatch(fetchingQou());
+    axios
+      .get(
+        `https://api.stackexchange.com/2.2/users/${id}/questions?order=desc&sort=activity&site=stackoverflow`
+      )
+      .then(response => {
+        dispatch(fetchingQouSuccess(response.data));
+      })
+      .catch(function(error) {
+        dispatch(fetchingQouError(error));
+      });
+  };
+};
+// ==============================QUESTION ON USERS=============================
