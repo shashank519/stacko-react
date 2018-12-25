@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Layout, Menu, Icon, List, Tag, Table, Divider } from "antd";
+import { Card, Tooltip, Table, Tag } from "antd";
 import { connect } from "react-redux";
 import * as moment from "moment";
 import {
@@ -67,8 +67,35 @@ class UserProfile extends Component {
               cover={<img alt="Loading Image" src={usersData.profile_image} />}
             >
               <Meta
-                title="Europe Street beat"
-                description="www.instagram.com"
+                title={<div>Reputation: {usersData.reputation}</div>}
+                description={
+                  <div style={{ display: "flex" }}>
+                    <div style={{ width: "33%" }}>
+                      <Tooltip placement="bottom" title={"Bronze Badges"}>
+                        <Tag color="grey">
+                          {usersData.badge_counts &&
+                            usersData.badge_counts.bronze}
+                        </Tag>
+                      </Tooltip>
+                    </div>
+                    <div style={{ width: "33%" }}>
+                      <Tooltip placement="bottom" title={"Silver Badges"}>
+                        <Tag color="silver">
+                          {usersData.badge_counts &&
+                            usersData.badge_counts.silver}
+                        </Tag>
+                      </Tooltip>
+                    </div>
+                    <div style={{ width: "33%" }}>
+                      <Tooltip placement="bottom" title={"Gold Badges"}>
+                        <Tag color="gold">
+                          {usersData.badge_counts &&
+                            usersData.badge_counts.gold}
+                        </Tag>
+                      </Tooltip>
+                    </div>
+                  </div>
+                }
               />
             </Card>
           </span>

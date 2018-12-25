@@ -19,9 +19,4 @@ class App extends Component {
   }
 }
 
-//================================================Usage in actions to change routes
-// import history from './history'
-// history.push('/test') // this should change the url and re-render Test component
-//================================================
-
 export default App;
